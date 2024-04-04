@@ -8,3 +8,13 @@ Eg: Let's say this file has bits like 1000011100101. This sequence could corresp
 
 3. Function used to open a file in Node -> Node -> libuv -> open() system call to the OS.
 
+
+4. There are various ways to deal with file in Node. You can deal a file using the Promise API way or by callback API way or just synchronously.
+
+
+5. Time to read this file using Promise API: 11-14
+   Time to read this file using Callback API: 12-14
+   Time to read this file synchronously: 12-14
+
+   However, dealing with files synchronously will block the thread of execution
+
