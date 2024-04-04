@@ -1,0 +1,4 @@
+1. A file is just a squence of bits. These sequence of bits could mean different things depending upon the decoding used.
+
+Eg: Let's say this file has bits like 1000011100101. This sequence could correspond to some characters or some image or an audio or anything. 
+
