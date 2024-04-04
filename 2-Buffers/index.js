@@ -35,3 +35,8 @@ function bufferInBinary(buffer){
 console.log(bufferInBinary(myBuffer1))
 
 
+const myBuffer4 = Buffer.from("a","hex")
+
+console.log(myBuffer4)
+
+
