@@ -2,3 +2,9 @@
 
 Eg: Let's say this file has bits like 1000011100101. This sequence could correspond to some characters or some image or an audio or anything. 
 
+
+2. Node JS interacts with the files stored in the storage devices through the OS via system calls (study later).
+
+
+3. Function used to open a file in Node -> Node -> libuv -> open() system call to the OS.
+
