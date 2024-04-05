@@ -18,3 +18,6 @@ Eg: Let's say this file has bits like 1000011100101. This sequence could corresp
 
    However, dealing with files synchronously will block the thread of execution
 
+
+6. A file descriptor is a unique number assigned to a file when it is opened.
+
