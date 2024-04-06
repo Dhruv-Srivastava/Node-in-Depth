@@ -49,7 +49,12 @@ emitter.on("create", async (filepath, payload) => {
 });
 
 emitter.on("delete", async (filepath, payload) => {
-  console.log("Deleted a file");
+  try {
+    await fs.unlink(filepath);
+    console.log("File deleted successfully");
+  } catch (e) {
+    console.log("Unable to delete the file as file does not exist.");
+  }
 });
 
 emitter.on("add", async (filepath, payload) => {
@@ -57,7 +62,20 @@ emitter.on("add", async (filepath, payload) => {
 });
 
 emitter.on("rename", async (filepath, payload) => {
-  console.log("Renamed a file");
+  let payloadExists = true;
+  try {
+    await fs.access(payload);
+  } catch (e) {
+    payloadExists = false;
+  }
+  if (!payloadExists) {
+    try {
+      await fs.rename(filepath, payload);
+      console.log("File renamed successfully");
+    } catch (e) {
+      console.log("Unable to rename.");
+    }
+  } else console.log("A file already exists with the same name.");
 });
 
 emitter.on("error", async () => {
