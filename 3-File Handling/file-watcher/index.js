@@ -36,19 +36,27 @@ emitter.on("change", async (fileWrapper) => {
   else emitter.emit(method, file, payload);
 });
 
-emitter.on("create", async (file, payload) => {
-  console.log("Created a file");
+emitter.on("create", async (filepath, payload) => {
+  let fileInfo;
+  try {
+    fileInfo = await fs.open(filepath, "ax");
+    console.log("File created successfully.");
+  } catch (e) {
+    console.log("The file already exists.");
+  } finally {
+    if (fileInfo) await fileInfo.close();
+  }
 });
 
-emitter.on("delete", async (file, payload) => {
+emitter.on("delete", async (filepath, payload) => {
   console.log("Deleted a file");
 });
 
-emitter.on("add", async (file, payload) => {
+emitter.on("add", async (filepath, payload) => {
   console.log("Appended to a file");
 });
 
-emitter.on("rename", async (file, payload) => {
+emitter.on("rename", async (filepath, payload) => {
   console.log("Renamed a file");
 });
 
