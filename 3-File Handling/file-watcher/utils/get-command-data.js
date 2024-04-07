@@ -2,9 +2,17 @@ export function getCommandData(fileContent) {
   const prompts = fileContent.trim().toLowerCase().split(" ");
   const method = prompts.at(0);
   const file =
-    method === "add" || method === "rename" ? prompts.at(-2) : prompts.at(-1);
+    method === "rename"
+      ? prompts.at(-2)
+      : method === "add"
+      ? prompts.at(4)
+      : prompts.at(-1);
   const payload =
-    method === "add" || method === "rename" ? prompts.at(-1) : undefined;
+    method === "rename"
+      ? prompts.at(-1)
+      : method === "add"
+      ? prompts.slice(5).join(" ")
+      : undefined;
 
   return { method, file, payload };
 }
