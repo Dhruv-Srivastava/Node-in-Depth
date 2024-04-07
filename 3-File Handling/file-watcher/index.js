@@ -58,7 +58,24 @@ emitter.on("delete", async (filepath, payload) => {
 });
 
 emitter.on("add", async (filepath, payload) => {
-  console.log("Appended to a file");
+  console.log(filepath, payload);
+  let filepathExists = true;
+  try {
+    await fs.access(payload);
+  } catch (e) {
+    filepathExists = false;
+  }
+  if (!filepathExists)
+    console.log("Can't write to the file as it does not exist.");
+  else {
+    try {
+      const fileDescriptor = await fs.open(filepath, "");
+      await fileDescriptor.appendFile(payload + "\n");
+      console.log("Appended to file successfully.");
+    } catch (e) {
+      console.log("Failed to add to the file.");
+    }
+  }
 });
 
 emitter.on("rename", async (filepath, payload) => {
