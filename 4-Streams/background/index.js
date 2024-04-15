@@ -18,7 +18,7 @@ async function writeUsingPromise(filepath) {
   }
 }
 
-// This code took 8.5s to run, 25ish MB in the memory and 2% of the CPU
+// This code took 8.5s to run, 25ish MB in the memory and 25% of the CPU
 function writeUsingCallback(filepath) {
   console.time("duration");
   fsCallback.open(filepath, "w", (err, fd) => {
@@ -33,5 +33,29 @@ function writeUsingCallback(filepath) {
   });
 }
 
+
+// This code took 1.1ish to run, 250ish MB in the memory and 22% of the 
+// This is a naive implementation which is not so memory efficient.
+async function writeUsingStreams(filepath){
+  let fileHandler;
+  console.time("duration")
+  try{
+    fileHandler = await fsPromise.open(filepath,"w");
+    const writeStream = fileHandler.createWriteStream()
+    for(let i = 1; i<=1000_000; i++){
+        await writeStream.write(i+"\n")
+    }
+  }catch(e){
+    console.log("Unable to write to file.")
+  }finally{
+    if(fileHandler)
+      fileHandler.close()
+
+    console.timeEnd("duration")
+  }
+}
+
 // writeUsingPromise("./test.txt");
 // writeUsingCallback("./test.txt");
+// writeUsingStreams("./test.txt")
+
