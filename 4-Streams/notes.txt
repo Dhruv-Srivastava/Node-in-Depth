@@ -1,0 +1,5 @@
+1) Streams are an abstract interface to work with streaming data in Node JS.
+
+2) Streaming data? Streaming data -> Continuous flow of data.
+
+3) The basic premise of streams is that instead of sending/receiving data in one go (as a whole), we can send/receive data in chunks. This somehow makes the whole process faster* and more memory efficient.
