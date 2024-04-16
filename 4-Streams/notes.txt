@@ -3,3 +3,5 @@
 2) Streaming data? Streaming data -> Continuous flow of data.
 
 3) The basic premise of streams is that instead of sending/receiving data in one go (as a whole), we can send/receive data in chunks. This somehow makes the whole process faster* and more memory efficient.
+
+4) There are two fundamental types of stream, 'write' and 'read' streams and two more modified version of the fundamental, 'duplex' and 'transform'.
