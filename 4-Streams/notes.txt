@@ -5,3 +5,7 @@
 3) The basic premise of streams is that instead of sending/receiving data in one go (as a whole), we can send/receive data in chunks. This somehow makes the whole process faster* and more memory efficient.
 
 4) There are two fundamental types of stream, 'write' and 'read' streams and two more modified version of the fundamental, 'duplex' and 'transform'.
+
+5) The write and read stream object has ONE buffer with a maximum capacity of 16 KB often called as high watermark. However, both duplex and transform stream object has TWO buffers, one for writing and another for reading.
+
+6) One must always write to the write stream buffer when the buffer becomes empty. If you keep writing to the buffer and won't let the buffer to drain/empty, then you are going to cause memory issues.
