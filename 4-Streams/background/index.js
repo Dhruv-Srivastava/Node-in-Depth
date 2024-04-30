@@ -55,7 +55,7 @@ async function writeUsingStreams(filepath) {
 }
 
 // This code took 6.1ish to run, 26ish MB in the memory and 26% of the CPU
-async function writeUsingStreamsEfficient(filepath) {
+export async function writeUsingStreamsEfficient(filepath, numOfWrites) {
   let fileHandler;
   console.time("duration");
   let start = 1;
@@ -64,11 +64,11 @@ async function writeUsingStreamsEfficient(filepath) {
     const writeStream = fileHandler.createWriteStream();
 
     function writeToStream(toWriteFrom) {
-      for (let i = toWriteFrom; i <= 1000_000; i++) {
+      for (let i = toWriteFrom; i <= numOfWrites; i++) {
         const myBuffer = Buffer.from(i + "\n");
         const canWrite = writeStream.write(myBuffer);
         start = i + 1;
-        if(i === 1000_000) writeStream.end()
+        if(i === numOfWrites) writeStream.end()
         if (!canWrite) break;
       }
     }
@@ -92,4 +92,4 @@ async function writeUsingStreamsEfficient(filepath) {
 // writeUsingPromise("./test.txt");
 // writeUsingCallback("./test.txt");
 // writeUsingStreams("./test.txt")
-writeUsingStreamsEfficient("./test.txt");
+// writeUsingStreamsEfficient("./test.txt", 1_000_000);
